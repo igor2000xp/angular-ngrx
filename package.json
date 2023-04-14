@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng generate @ngrx/schematics:action Zipcode --group",
+    "ng": "ng generate @ngrx/schematics:effect CurrentConditions --module app.module.ts --group",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
@@ -20,6 +20,7 @@
     "@angular/platform-browser": "6.0.0",
     "@angular/platform-browser-dynamic": "6.0.0",
     "@angular/router": "6.0.0",
+    "@ngrx/effects": "^6.0.1",
     "@ngrx/store": "^6.0.1",
     "@ngrx/store-devtools": "^6.0.1",
     "bootstrap": "^3.3.7",

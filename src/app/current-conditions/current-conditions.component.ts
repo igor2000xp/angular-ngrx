@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {WeatherService} from "../weather.service";
-import {LocationService} from "../location.service";
-import {Router} from "@angular/router";
+import {Store} from '@ngrx/store';
+import {State} from '../reducers';
+import {WeatherService} from '../weather.service';
 
 @Component({
   selector: 'app-current-conditions',
@@ -10,14 +10,19 @@ import {Router} from "@angular/router";
 })
 export class CurrentConditionsComponent {
 
-  constructor(private weatherService : WeatherService, private locationService : LocationService, private router : Router) {
-  }
+    zipcodes: Array<String>;
 
-  getCurrentConditions() {
-    return this.weatherService.getCurrentConditions();
-  }
+    currentConditions: Map<string, any>;
 
-  showForecast(zipcode : string){
-    this.router.navigate(['/forecast', zipcode])
-  }
+    constructor(private store: Store<State>, public weatherService: WeatherService) {
+        store.select(state => state.zipcodes)
+            .subscribe(zips => this.zipcodes = zips.zipcodes);
+
+        store.select(state => state.currentConditions)
+            .subscribe(conditions => this.currentConditions = conditions.currentConditions);
+    }
+
+    getConditions(zip: string) {
+        return this.currentConditions.get(zip);
+    }
 }

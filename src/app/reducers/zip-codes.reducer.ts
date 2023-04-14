@@ -1,29 +1,21 @@
-import { ZipcodeActions, ZipcodeActionTypes } from '../actions/zipcode.actions';
+import {ZipcodeActions, ZipcodeActionTypes} from '../actions/zipcode.actions';
 
 
-export interface ZipCodesState {
-  zipcodes: string[];
+export interface ZipcodeState {
+    zipcodes: Array<string>
 }
 
-export const initialState: ZipCodesState = {
-  zipcodes: [],
+export const initialState: ZipcodeState = {
+    zipcodes: []
 };
 
-export function ZipCodeReducer(state = initialState, action: ZipcodeActions): ZipCodesState {
+export function zipcodeReducer(state = initialState, action: ZipcodeActions): ZipcodeState {
   switch (action.type) {
-    case ZipcodeActionTypes.AddZipcodes:
-      return {
-      ...state,
-        zipcodes: [...state.zipcodes, action.zipcode],
-      };
-
-    case ZipcodeActionTypes.RemoveZipcodes:
-      return {
-      ...state,
-        zipcodes: state.zipcodes.filter(zipcode => zipcode!== action.zipcode),
-      };
-
-    default:
+      case ZipcodeActionTypes.AddZipcode:
+        return {...state, zipcodes: [...state.zipcodes, action.zipcode]};
+      case ZipcodeActionTypes.RemoveZipcode:
+          return {...state, zipcodes: state.zipcodes.filter( item => item !== action.zipcode)};
+      default:
       return state;
   }
 }

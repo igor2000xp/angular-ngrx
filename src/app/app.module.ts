@@ -16,6 +16,8 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { EffectsModule } from '@ngrx/effects';
+import { CurrentConditionsEffects } from './effects/current-conditions.effects';
 
 @NgModule({
   declarations: [
@@ -31,8 +33,9 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     RouterModule,
     routing,
+    EffectsModule.forRoot([CurrentConditionsEffects]),
     StoreModule.forRoot(reducers, { metaReducers }),
-    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [LocationService, WeatherService],
   bootstrap: [AppComponent]
