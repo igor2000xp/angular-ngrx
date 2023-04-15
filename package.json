@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng generate @ngrx/schematics:action Zipcode  --group",
+    "ng": "ng generate @ngrx/schematics:effect CurrentConditions --module app.module.ts --group",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",

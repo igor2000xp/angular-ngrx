@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
-import {WeatherService} from "../weather.service";
-import {LocationService} from "../location.service";
-import {Router} from "@angular/router";
-import { Store } from '@ngrx/store';
-import { State } from '../reducers';
+import {Store} from '@ngrx/store';
+import {State} from '../reducers';
+import {WeatherService} from '../weather.service';
+import {RemoveZipcode} from '../actions/zipcode.actions';
 
 @Component({
   selector: 'app-current-conditions',
@@ -11,22 +10,24 @@ import { State } from '../reducers';
   styleUrls: ['./current-conditions.component.css']
 })
 export class CurrentConditionsComponent {
-  zipcodes: string[] = [];
-  constructor(
-    // private weatherService : WeatherService,
-    // private locationService : LocationService,
-    private router : Router,
-    private store : Store<State>,
-  ) {
-    store.select(state => state.zipcodes)
-      .subscribe(zips => this.zipcodes = zips.zipcodes);
-  }
 
-  // getCurrentConditions() {
-  //   return this.weatherService.getCurrentConditions();
-  // }
+    zipcodes: Array<String>;
 
-  showForecast(zipcode : string){
-    this.router.navigate(['/forecast', zipcode])
-  }
+    currentConditions: Map<string, any>;
+
+    constructor(private store: Store<State>, public weatherService: WeatherService) {
+        store.select(state => state.zipcodes)
+            .subscribe(zips => this.zipcodes = zips.zipcodes);
+
+        store.select(state => state.currentConditions)
+            .subscribe(conditions => this.currentConditions = conditions.currentConditions);
+    }
+
+    getConditions(zip: string) {
+        return this.currentConditions.get(zip);
+    }
+
+    removeZip(zip: string) {
+        this.store.dispatch(new RemoveZipcode(zip));
+    }
 }
