@@ -1,5 +1,6 @@
 <div>
-  <div *ngFor="let zip  of zipcodes" class="well flex" (click)="showForecast(zip)">
+<!--  <div *ngFor="let zip  of zipcodes" class="well flex" (click)="showForecast(zip)">-->
+  <div *ngFor="let zip  of zipcodes" class="well flex">
     <div>
       <h3>{{getConditions(zip)?.name}} ({{zip}})</h3>
       <h4>Current conditions: {{getConditions(zip)?.weather[0].main}}</h4>

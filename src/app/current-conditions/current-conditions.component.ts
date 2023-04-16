@@ -3,6 +3,7 @@ import {Store} from '@ngrx/store';
 import {State} from '../reducers';
 import {WeatherService} from '../weather.service';
 import {RemoveZipcode} from '../actions/zipcode.actions';
+import { ICurrentConditions } from '../models';
 
 @Component({
   selector: 'app-current-conditions',
@@ -13,7 +14,7 @@ export class CurrentConditionsComponent {
 
     zipcodes: Array<String>;
 
-    currentConditions: Map<string, any>;
+    currentConditions: Map<string, ICurrentConditions>;
 
     constructor(private store: Store<State>, public weatherService: WeatherService) {
         store.select(state => state.zipcodes)

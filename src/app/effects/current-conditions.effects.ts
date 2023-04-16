@@ -1,17 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import {Observable, of} from 'rxjs';
-import {mergeMap, catchError, map} from 'rxjs/operators';
+import { mergeMap, catchError, map } from 'rxjs/operators';
 import {AddZipcode, ZipcodeActionTypes} from '../actions/zipcode.actions';
 import {WeatherService} from '../weather.service';
-import {CurrentConditionsLoaded, CurrentConditionsLoadFailed} from '../actions/current-conditions.actions';
+import {
+  CurrentConditionsActions,
+  CurrentConditionsLoaded,
+  CurrentConditionsLoadFailed
+} from '../actions/current-conditions.actions';
 
 
 @Injectable()
 export class CurrentConditionsEffects {
 
     @Effect()
-    loadCurrentConditions$: Observable<any> = this.actions$.pipe(
+    loadCurrentConditions$: Observable<CurrentConditionsActions> = this.actions$.pipe(
         ofType(ZipcodeActionTypes.AddZipcode),
         mergeMap(action =>
             this.weatherService.loadCurrentConditions(action['zipcode']).pipe(

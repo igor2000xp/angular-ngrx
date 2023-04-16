@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 
 import {HttpClient} from '@angular/common/http';
+import { ICurrentConditions, IForecast } from './models';
 
 @Injectable()
 export class WeatherService {
@@ -13,9 +14,9 @@ export class WeatherService {
 
   constructor(private http: HttpClient) { }
 
-  loadCurrentConditions(zipcode: string): Observable<any> {
-    // Here we make a request to get the curretn conditions data from the API. Note the use of backticks and an expression to insert the zipcode
-    return this.http.get(`${WeatherService.URL}/weather?zip=${zipcode},us&units=imperial&APPID=${WeatherService.APPID}`);
+  loadCurrentConditions(zipcode: string): Observable<ICurrentConditions> {
+    // Here we make a request to get the current conditions data from the API. Note the use of backticks and an expression to insert the zipcode
+    return this.http.get<ICurrentConditions>(`${WeatherService.URL}/weather?zip=${zipcode},us&units=imperial&APPID=${WeatherService.APPID}`);
   }
 
   removeCurrentConditions(zipcode: string) {
@@ -29,9 +30,9 @@ export class WeatherService {
     return this.currentConditions;
   }
 
-  getForecast(zipcode: string): Observable<any> {
+  getForecast(zipcode: string): Observable<IForecast> {
     // Here we make a request to get the forecast data from the API. Note the use of backticks and an expression to insert the zipcode
-    return this.http.get(`${WeatherService.URL}/forecast/daily?zip=${zipcode},us&units=imperial&cnt=5&APPID=${WeatherService.APPID}`);
+    return this.http.get<IForecast>(`${WeatherService.URL}/forecast/daily?zip=${zipcode},us&units=imperial&cnt=5&APPID=${WeatherService.APPID}`);
 
   }
 
