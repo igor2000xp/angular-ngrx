@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng generate @ngrx/schematics:effect CurrentConditions --module app.module.ts --group",
+    "ng": "ng g @ngrx/schematics:entity User --group",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
