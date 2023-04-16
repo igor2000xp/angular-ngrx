@@ -14,6 +14,8 @@ import {
 @Injectable()
 export class CurrentConditionsEffects {
 
+  constructor(private actions$: Actions<AddZipcode>, private weatherService: WeatherService) {}
+
     @Effect()
     loadCurrentConditions$: Observable<CurrentConditionsActions> = this.actions$.pipe(
         ofType(ZipcodeActionTypes.AddZipcode),
@@ -26,6 +28,4 @@ export class CurrentConditionsEffects {
             )
         )
     );
-
-    constructor(private actions$: Actions<AddZipcode>, private weatherService: WeatherService) {}
 }

@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import {ICurrentConditions} from "../models";
 
 export enum CurrentConditionsActionTypes {
     CurrentConditionsLoaded = '[CurrentConditions] CurrentConditions Loaded',
@@ -8,7 +9,7 @@ export enum CurrentConditionsActionTypes {
 export class CurrentConditionsLoaded implements Action {
     readonly type = CurrentConditionsActionTypes.CurrentConditionsLoaded;
 
-    constructor(public zipcode: string, public conditions: any){}
+    constructor(public zipcode: string, public conditions: ICurrentConditions){}
 }
 
 export class CurrentConditionsLoadFailed implements Action {
